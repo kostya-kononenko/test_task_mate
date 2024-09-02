@@ -17,3 +17,8 @@
 ```shell
 > pip install -r requirements.txt
 ```
+
+#### Start parsing:
+```shell
+> python parser.py
+```
