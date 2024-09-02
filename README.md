@@ -23,4 +23,5 @@
 > python parser.py
 ```
 
-Result: After the script is completed, the file with vacancies will be saved in the root directory of the project under the name vacancies.csv
+## Result: 
+After the script is completed, the file with vacancies will be saved in the root directory of the project under the name vacancies.csv
