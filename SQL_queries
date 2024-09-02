@@ -1,0 +1,42 @@
+SELECT
+    date_trunc('week', leads.created_at)::DATE AS week_start,
+  courses.slug AS course_slug,
+COUNT(*) AS lead_count
+FROM leads
+INNER JOIN courses
+ON leads.course_id = courses.id
+GROUP BY week_start, course_slug
+ORDER BY week_start, course_slug;
+
+
+
+
+SELECT
+domains.country_name,
+COUNT(*) AS lead_count
+FROM leads
+INNER JOIN courses ON leads.course_id = courses.id
+INNER JOIN users ON leads.user_id = users.id
+INNER JOIN domains ON users.domain_id = domains.id
+WHERE
+leads.status = 'WON'
+AND courses.type = 'FLEX'
+AND leads.created_at >= '2024-01-01'
+GROUP BY domains.country_name;
+
+
+
+SELECT
+    users.email AS user_email,
+    leads.id AS lead_id,
+    leads.lost_reason,
+    courses.type AS course_type,
+    leads.status AS lead_status,
+    leads.updated_at::DATE AS lead_update
+FROM users
+INNER JOIN leads ON users.id = leads.user_id
+INNER JOIN courses ON courses.id = leads.course_id
+WHERE
+    courses.type = 'FLEX'
+    AND leads.status = 'LOST'
+    AND leads.updated_at >= '2024-07-01';
